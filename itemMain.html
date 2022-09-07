@@ -21,43 +21,22 @@ aabdjVtDyODuXtGkvJfA7GEEAE%2B7oKgHMt3Vs2z1iZZy%2Fh0S9KF7iOxPZFyyqKg28lO9bKPRcx3W
     const queryParams = '?' + 'serviceKey' + '=' + EncodingKEY;
 
     const root = document.getElementById("root")
-    root.style.width = "100vw"
-    root.style.height = "100vh"
-    root.style.display = "flex"
-    root.style.flexWrap = "wrap"
-    // root.innerHTML += "<div>저희의 이름을 찾아주세요.</div>"
-    let item;
-    let list;
-    let itemList = []
 
+    let item;
     async function dataFUNC() {
-      const res = await fetch(ListURL + queryParams + `&numOfRows=9`).then(datas => datas.text())
+      const res = await fetch(ItemURL + queryParams + "&animalSeq=300").then(datas => datas.text())
         .then((data) => {
           const parser = new DOMParser();
           const xml = parser.parseFromString(data, "application/xml")
-          // console.log(xml)
-          list = xmlToJson(xml)
-
-          return list
+          console.log(xml)
+          item = xmlToJson(xml)
+          return item
         })
         .catch(console.error)
     }
     dataFUNC().then(() => {
-      // console.log(list.ServiceResult.MsgBody.items)
-      list.ServiceResult.MsgBody.items.forEach((item) => {
-        itemList.push(item.animalSeq)
-        root.innerHTML += `<div style=" width : 250px; height : 300px">
-          <div>
-          발견위치:${item.foundPlace}
-</div>
-<div>게시물 번호: ${item.animalSeq}</div>
-<img style=" width : 200px; height : 200px" src="http://www.daejeon.go.kr/${item?.filePath === undefined ? "" : item.filePath}" alt="이미지 준비중">
-</div>`
-      })
-      // console.log(itemList)
-
+      console.log(item)
     })
-
 
 
 
