@@ -23,12 +23,31 @@ aabdjVtDyODuXtGkvJfA7GEEAE%2B7oKgHMt3Vs2z1iZZy%2Fh0S9KF7iOxPZFyyqKg28lO9bKPRcx3W
     //쿼리파람스 주소뒤에 붙여서 사용
     const queryParams = '?' + 'serviceKey' + '=' + EncodingKEY;
     //root div끌어오고 스타일 지정
+    const body = document.body
+    const header = document.createElement("header")
+    header.style.width = "100vw"
+    header.style.height = "200px"
+    body.appendChild(header)
+
+    
+
+
+
+    // banner main
     const root = document.getElementById("root")
-    root.style.width = "100vw"
     root.style.height = "100vh"
-    root.style.display = "flex"
-    root.style.flexWrap = "wrap"
+
+    const banner = document.createElement("main")
+
+    displayFlexCenter(root)
+    body.appendChild(root)
+
+    banner.style.width = "1200px"
+    banner.style.height = "1200px"
+    banner.style.display = "flex"
+    banner.style.flexWrap = "wrap"
     // root.innerHTML += "<div>저희의 이름을 찾아주세요.</div>"
+    root.appendChild(banner)
 
     // 무슨변수더라
     let item;
@@ -53,12 +72,12 @@ aabdjVtDyODuXtGkvJfA7GEEAE%2B7oKgHMt3Vs2z1iZZy%2Fh0S9KF7iOxPZFyyqKg28lO9bKPRcx3W
       // console.log(list.ServiceResult.MsgBody.items)
       list.ServiceResult.MsgBody.items.forEach((item) => {
         itemList.push(item.animalSeq)
-        root.innerHTML += `<div style=" width : 250px; height : 300px">
+        banner.innerHTML += `<div style="display : flex; flex-direction : column; justify-content: center; align-items : center; width : 400px; height : 400px">
           <div>
           발견위치:${item.foundPlace}
 </div>
 <div>게시물 번호: ${item.animalSeq}</div>
-<img style=" width : 200px; height : 200px" src="http://www.daejeon.go.kr/${item?.filePath === undefined ? "" : item.filePath}" alt="이미지 준비중">
+<img style=" width : 300px; height : 300px" src="http://www.daejeon.go.kr/${item?.filePath === undefined ? "" : item.filePath}" alt="이미지 준비중">
 </div>`
       })
       // console.log(itemList)
@@ -66,7 +85,14 @@ aabdjVtDyODuXtGkvJfA7GEEAE%2B7oKgHMt3Vs2z1iZZy%2Fh0S9KF7iOxPZFyyqKg28lO9bKPRcx3W
     })
 
 
+    function displayFlexCenter(tagName) {
+      tagName.style.display = "flex"
+      tagName.style.justifyContent = "center"
+      tagName.style.alignItems = "center"
+    }
 
+    // 특정 기준으로 데이터 설계
+    // animalSeq
 
 
     // xml을 json으로 변환해주는 xmlToJson함수 선언
